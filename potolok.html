@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Натяжной потолок</title>
+<style>html{-webkit-text-size-adjust:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Unbounded:wght@500;700&display=swap">
+<style>
+/* Same sheet as the wiring page: plan of the ceilings on top, then canvases, lights and notes for the installer */
+:root {
+  --bg: #f3f4f1; --sheet: #ffffff; --paper: #ffffff; --ink: #1c2024; --muted: #5d646b; --rule: #d9ddd6;
+  --light: #c97b00; --switch: #0a7d84; --hl: #ffe9a8;
+  --display: "Unbounded", "IBM Plex Sans", system-ui, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #15181b; --sheet: #1d2125; --ink: #e8eae6; --muted: #9aa2a9; --rule: #343a40;
+    --light: #f2b33d; --switch: #3fc3c9; --hl: #4a3f1c;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #15181b; --sheet: #1d2125; --ink: #e8eae6; --muted: #9aa2a9; --rule: #343a40;
+  --light: #f2b33d; --switch: #3fc3c9; --hl: #4a3f1c;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 24px 48px;
+}
+.wrap { max-width: 1320px; margin: 0 auto; display: grid; gap: 28px; }
+header { display: grid; gap: 8px; }
+.back { font-size: 14px; color: var(--switch); }
+h1 { font-family: var(--display); font-weight: 700; font-size: clamp(24px, 3.4vw, 34px); margin: 0; letter-spacing: -0.01em; text-wrap: balance; }
+.lede { margin: 0; color: var(--muted); max-width: 70ch; }
+h2 { font-family: var(--display); font-weight: 500; font-size: 18px; margin: 0; text-wrap: balance; }
+h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin: 0; font-weight: 600; }
+
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.stat { background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; padding: 12px 14px; display: grid; gap: 2px; }
+.stat b { font: 600 24px var(--mono); font-variant-numeric: tabular-nums; }
+.stat span { color: var(--muted); font-size: 13px; }
+
+.block { display: grid; gap: 16px; background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; padding: 20px 16px; min-width: 0; }
+.block-head { display: grid; gap: 6px; }
+.block-head p { margin: 0; color: var(--muted); max-width: 80ch; }
+.plan-scroll { overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; background: var(--paper); }
+.plan-scroll svg { display: block; width: 100%; min-width: 560px; height: auto; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12.5px; color: var(--muted); }
+.mk { cursor: pointer; }
+.mk text { font: 600 10px var(--mono); text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+.mk.on circle, .mk.on rect, .mk.on line { stroke-width: 4; }
+
+.tbl { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+th { text-align: left; font-weight: 600; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); padding: 6px 8px; border-bottom: 1px solid var(--rule); }
+td { padding: 8px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th.r, td.r { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+td.mono, .mono { font-family: var(--mono); }
+td small { display: block; color: var(--muted); font-size: 12.5px; margin-top: 2px; }
+tfoot td { border-top: 2px solid var(--rule); border-bottom: 0; font-weight: 600; }
+tr.pt { cursor: pointer; }
+tr.pt.on td { background: var(--hl); }
+td.n { font: 600 12px var(--mono); white-space: nowrap; }
+.sw { display: inline-block; width: 14px; height: 4px; border-radius: 2px; vertical-align: middle; margin-right: 4px; }
+.rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.rules div { display: grid; gap: 4px; align-content: start; }
+.rules p { margin: 0; font-size: 13.5px; }
+.fine { color: var(--muted); font-size: 12.5px; margin: 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="back" href="./">← Электрика квартиры</a>
+    <h1>Натяжной потолок</h1>
+    <p class="lede">Полотна по комнатам, профиль по периметру, углы и всё, что нужно сделать под светильники до натяжки. Размеры — по той же 3D-модели, что и проводка; перед заказом их подтверждает замерщик.</p>
+  </header>
+
+  <div class="stats" id="stats"></div>
+
+  <section class="block">
+    <div class="block-head">
+      <h2>План потолков</h2>
+      <p>Светильники с номерами как на странице электрики, кабели над полотном — цветом линии. Нажмите на светильник, чтобы найти его в таблице.</p>
+    </div>
+    <div class="plan-scroll">
+      <svg id="plan" viewBox="-50 -362 712 724" role="img" aria-label="План потолков: комнаты с размерами и площадью, светильники и кабели над полотном">
+        <g id="base"></g><g id="wires"></g><g id="marks"></g>
+      </svg>
+    </div>
+    <div class="legend">
+      <span>⊗ точечный GX53</span><span>◎ влагозащищённый IP44 / IP65</span><span>◉ подвес</span><span>━ трек</span><span>── кабель над полотном (до натяжки)</span>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <h2>Полотна</h2>
+      <p>Площадь — по стенам комнаты, по ней обычно считают цену. Ширина полотна — по меньшей стороне с запасом 10 см на крепление: до 3,2 м подходит обычное, шире — широкое полотно без шва.</p>
+    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Комната</th><th class="r">Размер, м</th><th class="r">Площадь</th><th class="r">Периметр (профиль)</th><th class="r">Углы</th><th>Полотно</th><th class="r">Светильники</th></tr></thead>
+      <tbody id="rooms-body"></tbody>
+      <tfoot id="rooms-foot"></tfoot>
+    </table></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <h2>Светильники в потолке</h2>
+      <p>Под каждый светильник монтажник ставит закладную (платформу) до натяжки полотна, потом вклеивает термокольцо и прорезает отверстие. Диаметр платформы и кольца — по вырезу светильника из его паспорта.</p>
+    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>№</th><th>Светильник</th><th>Где</th><th>Что поставить до натяжки</th><th>Линия</th></tr></thead>
+      <tbody id="lights-body"></tbody>
+    </table></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><h2>Закладные и кольца</h2><p>Что купить или согласовать с монтажником потолка.</p></div>
+    <div class="tbl"><table>
+      <thead><tr><th>Позиция</th><th class="r">Кол-во</th><th>Для чего</th></tr></thead>
+      <tbody id="kit-body"></tbody>
+    </table></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><h2>Для монтажника потолка</h2></div>
+    <div class="rules">
+      <div><h3>Высота</h3><p>Полотно — на ≈ 260 см от чистого пола, ≈ 5–7 см ниже перекрытия. Этого хватает на платформы GX53 и гофру с кабелем. Точную высоту и уровень снимает замерщик.</p></div>
+      <div><h3>Сначала электрика</h3><p>Все кабели над полотном прокладываются в гофре и крепятся к перекрытию клипсами до натяжки. Концы к светильникам — с запасом ≈ 30 см, чтобы достать через отверстие.</p></div>
+      <div><h3>Доступ через отверстия</h3><p>Распаечные коробки и приёмники беспроводных выключателей ставятся у светильников — не дальше ≈ 20 см от отверстия, иначе до них не добраться после натяжки.</p></div>
+      <div><h3>Санузел</h3><p>Светильник над ванной — IP65 на 12 В; трансформатор ставится вне зоны ванны, у отверстия соседнего светильника. Кабели в санузле идут только поверху, по стенам; короб у правой стены — до натяжки.</p></div>
+      <div><h3>Кухня</h3><p>Под трек над столешницей — закладной брус по всей длине трека. Под подвес над столом — закладная под люстру с крюком или планкой, по центру стола.</p></div>
+      <div><h3>Шкафы и окна</h3><p>Шкафы коридора ставятся после потолка. У окон в комнате и на кухне заранее решите карниз: потолочный, скрытый в нише или на стене — от этого зависит профиль у окна.</p></div>
+    </div>
+    <p class="fine">Цифры на странице считаются из того же файла данных, что и проводка: если меняются стены или светильники, страница пересчитывается сама.</p>
+  </section>
+</div>
+
+<script src="data.js"></script>
+<script>
+const NS = "http://www.w3.org/2000/svg";
+const el = (n, a, text) => { const e = document.createElementNS(NS, n); for (const k in a) e.setAttribute(k, a[k]); if (text != null) e.textContent = text; return e; };
+const Y = y => -y;
+const polyPts = poly => poly.map(([x, y]) => `${x},${Y(y)}`).join(" ");
+const fmt = (v, d = 1) => v.toFixed(d).replace(".", ",");
+const C = { wall: "#3a3f45", paper: "#ffffff", ceil: "#f6f2e6", l: "#c97b00", ink: "#1c2024", dim: "#6b7279" };
+const CEIL_Z = 260;
+const LIGHT = { spot: "Точечный GX53", spotip: "Влагозащищённый", pendant: "Подвес", line: "Трек" };
+// a spot marked IPxx in its name is a wet-zone fixture, whatever its plan symbol
+const P = DATA.points.map((p, i) => Object.assign({ n: i + 1 }, p, p.k === "spot" && /IP\d/.test(p.t) ? { k: "spotip" } : {}));
+const lights = P.filter(p => LIGHT[p.k]);
+
+// ---- geometry of each ceiling: area, perimeter, inside/outside corners, bounding box
+function geo(poly) {
+  let a = 0, per = 0;
+  poly.forEach(([x0, y0], i) => { const [x1, y1] = poly[(i + 1) % poly.length]; a += x0 * y1 - x1 * y0; per += Math.hypot(x1 - x0, y1 - y0); });
+  const sgn = Math.sign(a);
+  let inner = 0, outer = 0;
+  poly.forEach((p, i) => {
+    const q = poly[(i - 1 + poly.length) % poly.length], r = poly[(i + 1) % poly.length];
+    const cross = (p[0] - q[0]) * (r[1] - p[1]) - (p[1] - q[1]) * (r[0] - p[0]);
+    if (Math.sign(cross) === sgn) inner++; else outer++;
+  });
+  const xs = poly.map(p => p[0]), ys = poly.map(p => p[1]);
+  return { area: Math.abs(a) / 2 / 1e4, per: per / 100, inner, outer, w: (Math.max(...xs) - Math.min(...xs)) / 100, h: (Math.max(...ys) - Math.min(...ys)) / 100, cx: (Math.max(...xs) + Math.min(...xs)) / 2, cy: (Math.max(...ys) + Math.min(...ys)) / 2 };
+}
+const rooms = DATA.rooms.map(r => Object.assign({ g: geo(r.poly), lights: lights.filter(p => p.r === r.id) }, r));
+
+// ---- which line feeds a light: the route that ends at its ceiling point
+function lineOf(p) {
+  const [x, y] = p.at;
+  return DATA.lines.find(L => L.branches.some(br => br.pts.some(q => Math.abs(q[0] - x) < 0.6 && Math.abs(q[1] - y) < 0.6 && q[2] >= CEIL_Z)));
+}
+
+// ---- plan
+const base = document.getElementById("base"), wires = document.getElementById("wires"), marks = document.getElementById("marks");
+rooms.forEach(r => base.appendChild(el("polygon", { points: polyPts(r.poly), fill: C.wall, stroke: C.wall, "stroke-width": 24, "stroke-linejoin": "miter" })));
+// label spots picked clear of fixtures and wires; any other room falls back to its centre
+const LABEL = { c: [205, 128], b: [196, 324], g: [480, -115] };
+rooms.forEach(r => {
+  base.appendChild(el("polygon", { points: polyPts(r.poly), fill: C.ceil }));
+  const [lx, ly] = LABEL[r.id] || [r.g.cx, r.g.cy];
+  const t = el("text", { x: lx, y: Y(ly) - 6, "text-anchor": "middle", fill: C.ink, "font-size": 12, "font-weight": 600, "font-family": "IBM Plex Sans, system-ui, sans-serif" }, r.name);
+  const s = el("text", { x: lx, y: Y(ly) + 9, "text-anchor": "middle", fill: C.dim, "font-size": 10, "font-family": "IBM Plex Mono, monospace" }, `${fmt(r.g.area, 2)} м²`);
+  base.appendChild(t); base.appendChild(s);
+});
+// cables that run above the canvas
+DATA.lines.forEach((L, k) => {
+  const off = (k - 5) * 1.6;
+  L.branches.forEach(br => br.pts.forEach((a, i) => {
+    if (!i) return;
+    const p = br.pts[i - 1];
+    if (Math.abs(p[2] - a[2]) > 0.1 || a[2] < CEIL_Z) return;
+    wires.appendChild(el("line", { x1: p[0] + off, y1: Y(p[1] + off), x2: a[0] + off, y2: Y(a[1] + off), stroke: L.color, "stroke-width": 1.4, "stroke-linecap": "round", opacity: 0.85 }));
+  }));
+});
+const R = 7;
+lights.forEach(p => {
+  const g = el("g", { class: "mk", "data-n": p.n, tabindex: 0, role: "button", "aria-label": `${p.n}. ${p.t}` });
+  const [x, y] = p.at, cy = Y(y);
+  if (p.k === "line") {
+    g.appendChild(el("line", { x1: p.at[0], y1: Y(p.at[1]), x2: p.at[2], y2: Y(p.at[3]), stroke: C.l, "stroke-width": 5, "stroke-linecap": "round" }));
+    g.appendChild(el("circle", { cx: (p.at[0] + p.at[2]) / 2, cy: Y(p.at[1]) - 12, r: R, fill: "#fff", stroke: C.l, "stroke-width": 2 }));
+    g.appendChild(el("text", { x: (p.at[0] + p.at[2]) / 2, y: Y(p.at[1]) - 12, fill: C.l }, p.n));
+  } else {
+    g.appendChild(el("circle", { cx: x, cy, r: R + (p.k === "pendant" ? 2 : 0), fill: p.k === "pendant" ? C.l : "#fff", stroke: C.l, "stroke-width": 2 }));
+    if (p.k === "spotip") g.appendChild(el("circle", { cx: x, cy, r: R - 3, fill: "none", stroke: C.l, "stroke-width": 1.2 }));
+    g.appendChild(el("text", { x, y: cy, fill: p.k === "pendant" ? "#fff" : C.l }, p.n));
+  }
+  marks.appendChild(g);
+});
+
+// ---- canvases table
+const rb = document.getElementById("rooms-body");
+let tA = 0, tP = 0, tIn = 0, tOut = 0, tL = 0;
+rooms.forEach(r => {
+  const { area, per, inner, outer, w, h } = r.g;
+  const need = Math.min(w, h) + 0.1;
+  const canvas = need <= 3.2 ? `обычное, без шва<small>нужна ширина ≈ ${fmt(need, 2)} м</small>` : `широкое, без шва<small>нужна ширина ≈ ${fmt(need, 2)} м — больше обычных 3,2 м</small>`;
+  const byKind = {};
+  r.lights.forEach(p => byKind[LIGHT[p.k]] = (byKind[LIGHT[p.k]] || 0) + 1);
+  const kinds = Object.entries(byKind).map(([k, v]) => `${k.toLowerCase()} — ${v}`).join(", ");
+  tA += area; tP += per; tIn += inner; tOut += outer; tL += r.lights.length;
+  const tr = document.createElement("tr");
+  tr.innerHTML = `<td><b>${r.name}</b></td><td class="r mono">${fmt(w, 2)} × ${fmt(h, 2)}</td><td class="r mono">${fmt(area, 2)} м²</td><td class="r mono">${fmt(per, 2)} м</td>
+    <td class="r mono">${inner}${outer ? `<small>+ ${outer} внешн.</small>` : ""}</td><td>${canvas}</td><td class="r mono">${r.lights.length}<small>${kinds}</small></td>`;
+  rb.appendChild(tr);
+});
+document.getElementById("rooms-foot").innerHTML = `<tr><td>Всего</td><td></td><td class="r mono">${fmt(tA, 2)} м²</td><td class="r mono">${fmt(tP, 2)} м</td><td class="r mono">${tIn}${tOut ? `<small>+ ${tOut} внешн.</small>` : ""}</td><td></td><td class="r mono">${tL}</td></tr>`;
+
+// ---- lights table
+const PREP = {
+  spot: "Платформа под GX53 + термокольцо",
+  spotip: "Платформа + термокольцо; светильник влагозащищённый",
+  pendant: "Закладная под люстру (крюк или планка) + термокольцо под чашу",
+  line: "Закладной брус по длине трека + термокольцо под ввод питания",
+};
+const lb = document.getElementById("lights-body");
+rooms.forEach(r => r.lights.forEach(p => {
+  const L = lineOf(p);
+  let prep = PREP[p.k];
+  if (p.k === "line") prep += `<small>брус ≈ ${fmt(Math.hypot(p.at[2] - p.at[0], p.at[3] - p.at[1]) / 100, 1)} м</small>`;
+  if (/12 В/.test(p.t)) prep += "<small>трансформатор 12 В — вне зоны ванны, у отверстия соседнего светильника</small>";
+  const tr = document.createElement("tr");
+  tr.className = "pt"; tr.dataset.n = p.n;
+  tr.innerHTML = `<td class="n">${p.n}</td><td><b>${p.t}</b><small>${r.name}</small></td><td>${p.w}${p.note ? `<small>${p.note}</small>` : ""}</td><td>${prep}</td>
+    <td class="mono">${L ? `<span class="sw" style="background:${L.color}"></span>${L.id}` : "—"}</td>`;
+  lb.appendChild(tr);
+}));
+
+// ---- kit
+const cnt = k => lights.filter(p => p.k === k).length;
+const track = lights.filter(p => p.k === "line").reduce((s, p) => s + Math.hypot(p.at[2] - p.at[0], p.at[3] - p.at[1]) / 100, 0);
+const kit = [
+  ["Платформа (закладная) под точечный светильник", cnt("spot") + cnt("spotip"), `GX53 — ${cnt("spot")}, санузел — ${cnt("spotip")}`],
+  ["Термокольцо под светильник", cnt("spot") + cnt("spotip") + cnt("pendant") + cnt("line"), "на каждое отверстие в полотне, включая подвес и ввод трека"],
+  ["Закладная под люстру", cnt("pendant"), "подвес над кухонным столом"],
+  ["Закладной брус под трек", `${fmt(track, 1)} м`, "по всей длине трека над столешницей"],
+  ["Профиль (багет) по периметру", `${fmt(tP, 1)} м`, "плюс ≈ 10 % на подрезку — монтажник берёт свой"],
+  ["Вставка-заглушка или теневой профиль", `${fmt(tP, 1)} м`, "по тому же периметру — по выбору"],
+];
+const kb = document.getElementById("kit-body");
+kit.forEach(([a, q, w]) => { const tr = document.createElement("tr"); tr.innerHTML = `<td>${a}</td><td class="r mono">${q}</td><td>${w}</td>`; kb.appendChild(tr); });
+
+document.getElementById("stats").innerHTML = [
+  [`${fmt(tA, 1)} м²`, "площадь потолков"],
+  [`${fmt(tP, 1)} м`, "профиль по периметру"],
+  [tIn + tOut, "углов"],
+  [tL, "светильников в потолке"],
+].map(([b, s]) => `<div class="stat"><b>${b}</b><span>${s}</span></div>`).join("");
+
+// ---- plan ↔ table
+function select(n, scroll) {
+  document.querySelectorAll(".on").forEach(e => e.classList.remove("on"));
+  document.querySelectorAll(`[data-n="${n}"]`).forEach(e => e.classList.add("on"));
+  if (scroll) document.querySelector(`tr[data-n="${n}"]`)?.scrollIntoView({ block: "center", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+}
+marks.addEventListener("click", e => { const g = e.target.closest(".mk"); if (g) select(g.dataset.n, true); });
+marks.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { const g = e.target.closest(".mk"); if (g) { e.preventDefault(); select(g.dataset.n, true); } } });
+lb.addEventListener("click", e => { const tr = e.target.closest("tr.pt"); if (tr) select(tr.dataset.n, false); });
+</script>
+</body>
+</html>
