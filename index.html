@@ -68,6 +68,21 @@ h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: 
 .dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
 .dot.s { background: var(--socket); } .dot.w { background: var(--switch); border-radius: 3px; } .dot.l { background: var(--light); }
 .legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12.5px; color: var(--muted); }
+/* wire key: one button per line; picking one dims the others on the plan */
+.wires { display: flex; flex-wrap: wrap; gap: 6px; }
+.wire { font: 500 12.5px var(--body); color: var(--ink); background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; padding: 4px 9px 4px 7px; display: inline-flex; align-items: center; gap: 7px; cursor: pointer; text-align: left; }
+.wire b { font: 600 12px var(--mono); }
+.wire[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.wire:focus-visible { outline: 2px solid var(--switch); outline-offset: 2px; }
+.wire .sw { width: 16px; height: 4px; }
+.wire-card { background: var(--sheet); border: 1px solid var(--rule); border-left-width: 5px; border-radius: 6px; padding: 10px 12px; display: grid; gap: 4px; font-size: 13.5px; }
+.wire-card[hidden] { display: none; }
+.wire-card .wc-head { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
+.wire-card button { font: 13px var(--body); background: none; border: 0; color: var(--muted); cursor: pointer; padding: 2px 4px; }
+.wire-card p { margin: 0; }
+#routes .rt { cursor: pointer; }
+#routes.sel .rt:not(.cur) { opacity: 0.12; }
+#routes .hit { stroke: #000; stroke-opacity: 0; stroke-width: 9; }
 .legend span { display: inline-flex; align-items: center; gap: 6px; }
 
 /* plan markers — colors come from the plan's own fixed palette so they read on the white drawing in both themes */
@@ -158,6 +173,8 @@ table.lines tfoot td, table.bomt tfoot td { border-top: 2px solid var(--rule); b
           <g id="marks"></g>
         </svg>
       </div>
+      <div class="wires" id="wires" role="group" aria-label="Линии проводки: нажмите, чтобы выделить на плане"></div>
+      <div class="wire-card" id="wire-card" hidden aria-live="polite"></div>
       <div class="legend">
         <span>○ розетка</span><span>◎ влагозащищённая IP44</span><span>● силовая</span><span>◇ интернет LAN</span>
         <span>□ выключатель</span><span>⊗ точечный светильник</span><span>◉ подвес</span><span>◐ бра</span><span>△ вывод кабеля</span><span>━ трек / линия</span>
@@ -471,6 +488,7 @@ DATA.lines.forEach((L, k) => {
       if (horiz && a[2] >= CEIL_Z) ceil += s; else if (horiz && a[2] <= SKIRT_Z) skirt += s; else if (horiz) furn += s; else wall += s;
       if (horiz) {
         const sk = a[2] <= SKIRT_Z, fu = a[2] > SKIRT_Z && a[2] < CEIL_Z;
+        g.appendChild(el("line", { class: `hit ${sk ? "lv-b" : "lv-t"}`, x1: p[0] + off, y1: Y(p[1] + off), x2: a[0] + off, y2: Y(a[1] + off) }));
         g.appendChild(el("line", { class: sk ? "lv-b" : "lv-t", x1: p[0] + off, y1: Y(p[1] + off), x2: a[0] + off, y2: Y(a[1] + off), stroke: L.color, "stroke-width": sk ? 2.6 : 1.3, "stroke-dasharray": sk ? "7 2" : fu ? "2 3" : "none", "stroke-linecap": "round", opacity: 0.9 }));
       } else {
         g.appendChild(el("circle", { class: "lv-v", cx: a[0] + off, cy: Y(a[1] + off), r: 2.4, fill: L.color }));
@@ -501,6 +519,35 @@ DATA.lines.forEach(L => {
 document.getElementById("lines-foot").innerHTML = `<tr><td></td><td colspan="4">Всего: ${Object.entries(byCable).map(([c, v]) => `${CABLE[c]} — ${fmt(v)} м`).join(" · ")}</td><td></td></tr>`;
 const chaseLen = CHASES.reduce((s, c) => s + c.len, 0);
 document.getElementById("chase-sum").textContent = `${CHASES.length} штроб, всего ≈ ${fmt(chaseLen)} м`;
+
+// ---- wire key and card: click a wire on the plan or its button to see what it is ----
+const wires = document.getElementById("wires"), card = document.getElementById("wire-card");
+DATA.lines.forEach(L => {
+  const b = document.createElement("button");
+  b.className = "wire"; b.dataset.line = L.id; b.setAttribute("aria-pressed", "false");
+  b.innerHTML = `<span class="sw" style="background:${L.color}"></span><b>${L.id}</b>${L.name}`;
+  wires.appendChild(b);
+});
+let curLine = null;
+function selectLine(id) {
+  curLine = curLine === id ? null : id;
+  routes.classList.toggle("sel", !!curLine);
+  routes.querySelectorAll(".rt").forEach(g => g.classList.toggle("cur", g.dataset.line === curLine));
+  wires.querySelectorAll(".wire").forEach(b => b.setAttribute("aria-pressed", b.dataset.line === curLine));
+  const L = DATA.lines.find(x => x.id === curLine);
+  card.hidden = !L;
+  if (!L) return;
+  const to = L.branches.map(br => br.to).filter(Boolean);
+  card.style.borderLeftColor = L.color;
+  card.innerHTML = `<div class="wc-head"><span><span class="sw" style="background:${L.color}"></span> <b class="mono">${L.id}</b> ${L.name}</span><button type="button" aria-label="Закрыть">✕</button></div>
+    <p class="fine">${L.breaker} · ${CABLE[L.cable]} · ${fmt(L.len)} м</p>
+    ${to.length ? `<p><b>К чему идёт:</b> ${to.join(", ")}</p>` : ""}
+    <p>${L.how}</p>
+    <p class="fine">под потолком ${fmt(L.ceil)} м · по низу ${fmt(L.skirt)} м${L.furn ? ` · за мебелью ${fmt(L.furn)} м` : ""}${L.wall ? ` · вверх-вниз ${fmt(L.wall)} м` : ""}${L.chase ? ` · штробы ${fmt(L.chase)} м` : ""}</p>`;
+  card.querySelector("button").addEventListener("click", () => selectLine(curLine));
+}
+wires.addEventListener("click", e => { const b = e.target.closest(".wire"); if (b) selectLine(b.dataset.line); });
+routes.addEventListener("click", e => { const g = e.target.closest(".rt"); if (g) selectLine(g.dataset.line); });
 
 // ---- distribution panel: DIN rows to scale, one module = one cell ----
 const pn = document.getElementById("panel-rows");
