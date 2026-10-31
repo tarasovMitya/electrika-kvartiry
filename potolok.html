@@ -81,7 +81,7 @@ td.n { font: 600 12px var(--mono); white-space: nowrap; }
   <header>
     <a class="back" href="./">← Электрика квартиры</a>
     <h1>Натяжной потолок</h1>
-    <p class="lede">Полотна по комнатам, профиль по периметру, углы и всё, что нужно сделать под светильники до натяжки. Размеры — по той же 3D-модели, что и проводка; перед заказом их подтверждает замерщик.</p>
+    <p class="lede">Что показать замерщику: где будут светильники, что под них поставить до натяжки и где над полотном идут кабели. Точные замеры, раскрой и закупку полотна и комплектующих делает замерщик — размеры здесь примерные, по 3D-модели.</p>
   </header>
 
   <div class="stats" id="stats"></div>
@@ -97,17 +97,17 @@ td.n { font: 600 12px var(--mono); white-space: nowrap; }
       </svg>
     </div>
     <div class="legend">
-      <span>⊗ точечный GX53</span><span>◎ влагозащищённый IP44 / IP65</span><span>◉ подвес</span><span>━ трек</span><span>── кабель над полотном (до натяжки)</span>
+      <span>⊗ точечный GX53</span><span>◎ влагозащищённый IP44 / IP65</span><span>◉ подвес</span><span>━ трек</span><span>── кабель над полотном (до натяжки)</span><span>┆ ниша скрытого карниза</span>
     </div>
   </section>
 
   <section class="block">
     <div class="block-head">
-      <h2>Полотна</h2>
-      <p>Площадь — по стенам комнаты, по ней обычно считают цену. Ширина полотна — по меньшей стороне с запасом 10 см на крепление: до 3,2 м подходит обычное, шире — широкое полотно без шва.</p>
+      <h2>Комнаты — ориентир</h2>
+      <p>Примерные размеры по модели, чтобы прикинуть смету до замера. Точные цифры даст замерщик. В последней колонке — что стоит с ним обсудить.</p>
     </div>
     <div class="tbl"><table>
-      <thead><tr><th>Комната</th><th class="r">Размер, м</th><th class="r">Площадь</th><th class="r">Периметр (профиль)</th><th class="r">Углы</th><th>Полотно</th><th class="r">Светильники</th></tr></thead>
+      <thead><tr><th>Комната</th><th class="r">Размер, м</th><th class="r">Площадь</th><th class="r">Периметр</th><th class="r">Углы</th><th>Обсудить</th><th class="r">Светильники</th></tr></thead>
       <tbody id="rooms-body"></tbody>
       <tfoot id="rooms-foot"></tfoot>
     </table></div>
@@ -116,7 +116,7 @@ td.n { font: 600 12px var(--mono); white-space: nowrap; }
   <section class="block">
     <div class="block-head">
       <h2>Светильники в потолке</h2>
-      <p>Под каждый светильник монтажник ставит закладную (платформу) до натяжки полотна, потом вклеивает термокольцо и прорезает отверстие. Диаметр платформы и кольца — по вырезу светильника из его паспорта.</p>
+      <p>Под каждый светильник монтажник ставит закладную до натяжки полотна, потом вклеивает термокольцо и прорезает отверстие. Покажите ему ваши светильники или их паспорта: диаметр выреза задаёт размер закладной и кольца.</p>
     </div>
     <div class="tbl"><table>
       <thead><tr><th>№</th><th>Светильник</th><th>Где</th><th>Что поставить до натяжки</th><th>Линия</th></tr></thead>
@@ -125,9 +125,9 @@ td.n { font: 600 12px var(--mono); white-space: nowrap; }
   </section>
 
   <section class="block">
-    <div class="block-head"><h2>Закладные и кольца</h2><p>Что купить или согласовать с монтажником потолка.</p></div>
+    <div class="block-head"><h2>Что передать замерщику</h2><p>Отверстия и закладные под ваши светильники — чтобы он учёл их в смете. Закладные и кольца ставит и закупает потолочная компания.</p></div>
     <div class="tbl"><table>
-      <thead><tr><th>Позиция</th><th class="r">Кол-во</th><th>Для чего</th></tr></thead>
+      <thead><tr><th>Что</th><th class="r">Сколько</th><th>Зачем</th></tr></thead>
       <tbody id="kit-body"></tbody>
     </table></div>
   </section>
@@ -135,12 +135,13 @@ td.n { font: 600 12px var(--mono); white-space: nowrap; }
   <section class="block">
     <div class="block-head"><h2>Для монтажника потолка</h2></div>
     <div class="rules">
-      <div><h3>Высота</h3><p>Полотно — на ≈ 260 см от чистого пола, ≈ 5–7 см ниже перекрытия. Этого хватает на платформы GX53 и гофру с кабелем. Точную высоту и уровень снимает замерщик.</p></div>
+      <div><h3>Высота</h3><p>В проекте полотно — на ≈ 260 см от чистого пола, ≈ 5–7 см ниже перекрытия: столько нужно под платформы GX53 и гофру с кабелем. Скажите это замерщику — уровень он снимает сам.</p></div>
       <div><h3>Сначала электрика</h3><p>Все кабели над полотном прокладываются в гофре и крепятся к перекрытию клипсами до натяжки. Концы к светильникам — с запасом ≈ 30 см, чтобы достать через отверстие.</p></div>
       <div><h3>Доступ через отверстия</h3><p>Распаечные коробки и приёмники беспроводных выключателей ставятся у светильников — не дальше ≈ 20 см от отверстия, иначе до них не добраться после натяжки.</p></div>
       <div><h3>Санузел</h3><p>Светильник над ванной — IP65 на 12 В; трансформатор ставится вне зоны ванны, у отверстия соседнего светильника. Кабели в санузле идут только поверху, по стенам; короб у правой стены — до натяжки.</p></div>
       <div><h3>Кухня</h3><p>Под трек над столешницей — закладной брус по всей длине трека. Под подвес над столом — закладная под люстру с крюком или планкой, по центру стола.</p></div>
-      <div><h3>Шкафы и окна</h3><p>Шкафы коридора ставятся после потолка. У окон в комнате и на кухне заранее решите карниз: потолочный, скрытый в нише или на стене — от этого зависит профиль у окна.</p></div>
+      <div><h3>Карнизы</h3><p>Комната — скрытый карниз в нише вдоль стены с окном и балконной дверью (≈ 3,2 м, ниша ≈ 15 см). Шторе хватит ≈ 2,2 м от угла со стеной коридора; кондиционер в углу у дальней стены висит под нишей — решите с замерщиком, вести нишу на всю стену или до кондиционера. Кухня — без карниза.</p></div>
+      <div><h3>Шкафы</h3><p>Шкафы коридора ставятся после потолка.</p></div>
     </div>
     <p class="fine">Цифры на странице считаются из того же файла данных, что и проводка: если меняются стены или светильники, страница пересчитывается сама.</p>
   </section>
@@ -194,6 +195,14 @@ rooms.forEach(r => {
   const s = el("text", { x: lx, y: Y(ly) + 9, "text-anchor": "middle", fill: C.dim, "font-size": 10, "font-family": "IBM Plex Mono, monospace" }, `${fmt(r.g.area, 2)} м²`);
   base.appendChild(t); base.appendChild(s);
 });
+// hidden curtain niche along the room's window wall; the kitchen has no curtain rail
+const NICHE = { r: "g", rect: [580.7, -332, 595.7, -10] };
+{
+  const [x0, y0, x1, y1] = NICHE.rect;
+  base.appendChild(el("rect", { x: x0, y: Y(y1), width: x1 - x0, height: y1 - y0, fill: "#e3eefb", stroke: "#2f6fd6", "stroke-width": 1.2, "stroke-dasharray": "4 3" }));
+  const t = el("text", { x: (x0 + x1) / 2, y: Y((y0 + y1) / 2), fill: "#2f6fd6", "font-size": 9, "font-family": "IBM Plex Sans, system-ui, sans-serif", "text-anchor": "middle", transform: `rotate(-90 ${(x0 + x1) / 2} ${Y((y0 + y1) / 2)})`, "dominant-baseline": "central" }, "скрытый карниз");
+  base.appendChild(t);
+}
 // cables that run above the canvas
 DATA.lines.forEach((L, k) => {
   const off = (k - 5) * 1.6;
@@ -226,17 +235,18 @@ let tA = 0, tP = 0, tIn = 0, tOut = 0, tL = 0;
 rooms.forEach(r => {
   const { area, per, inner, outer, w, h } = r.g;
   const need = Math.min(w, h) + 0.1;
-  const canvas = need <= 3.2 ? `обычное, без шва<small>нужна ширина ≈ ${fmt(need, 2)} м</small>` : `широкое, без шва<small>нужна ширина ≈ ${fmt(need, 2)} м — больше обычных 3,2 м</small>`;
+  const DISCUSS = { g: "скрытый карниз у окна", k: "без карниза" };
+  const canvas = [need > 3.2 ? `полотно без шва<small>комната шире 3,2 м — спросите про широкое полотно</small>` : "", DISCUSS[r.id] || ""].filter(Boolean).join("<br>") || "—";
   const byKind = {};
   r.lights.forEach(p => byKind[LIGHT[p.k]] = (byKind[LIGHT[p.k]] || 0) + 1);
   const kinds = Object.entries(byKind).map(([k, v]) => `${k.toLowerCase()} — ${v}`).join(", ");
   tA += area; tP += per; tIn += inner; tOut += outer; tL += r.lights.length;
   const tr = document.createElement("tr");
-  tr.innerHTML = `<td><b>${r.name}</b></td><td class="r mono">${fmt(w, 2)} × ${fmt(h, 2)}</td><td class="r mono">${fmt(area, 2)} м²</td><td class="r mono">${fmt(per, 2)} м</td>
+  tr.innerHTML = `<td><b>${r.name}</b></td><td class="r mono">${fmt(w, 2)} × ${fmt(h, 2)}</td><td class="r mono">≈ ${fmt(area, 1)} м²</td><td class="r mono">≈ ${fmt(per, 1)} м</td>
     <td class="r mono">${inner}${outer ? `<small>+ ${outer} внешн.</small>` : ""}</td><td>${canvas}</td><td class="r mono">${r.lights.length}<small>${kinds}</small></td>`;
   rb.appendChild(tr);
 });
-document.getElementById("rooms-foot").innerHTML = `<tr><td>Всего</td><td></td><td class="r mono">${fmt(tA, 2)} м²</td><td class="r mono">${fmt(tP, 2)} м</td><td class="r mono">${tIn}${tOut ? `<small>+ ${tOut} внешн.</small>` : ""}</td><td></td><td class="r mono">${tL}</td></tr>`;
+document.getElementById("rooms-foot").innerHTML = `<tr><td>Всего</td><td></td><td class="r mono">≈ ${fmt(tA, 1)} м²</td><td class="r mono">≈ ${fmt(tP, 1)} м</td><td class="r mono">${tIn}${tOut ? `<small>+ ${tOut} внешн.</small>` : ""}</td><td></td><td class="r mono">${tL}</td></tr>`;
 
 // ---- lights table
 const PREP = {
@@ -266,17 +276,14 @@ const kit = [
   ["Термокольцо под светильник", cnt("spot") + cnt("spotip") + cnt("pendant") + cnt("line"), "на каждое отверстие в полотне, включая подвес и ввод трека"],
   ["Закладная под люстру", cnt("pendant"), "подвес над кухонным столом"],
   ["Закладной брус под трек", `${fmt(track, 1)} м`, "по всей длине трека над столешницей"],
-  ["Профиль (багет) по периметру", `${fmt(tP, 1)} м`, "плюс ≈ 10 % на подрезку — монтажник берёт свой"],
-  ["Вставка-заглушка или теневой профиль", `${fmt(tP, 1)} м`, "по тому же периметру — по выбору"],
+  ["Кабели над полотном", "до натяжки", "проводку закончить до монтажа потолка — план выше"],
 ];
 const kb = document.getElementById("kit-body");
 kit.forEach(([a, q, w]) => { const tr = document.createElement("tr"); tr.innerHTML = `<td>${a}</td><td class="r mono">${q}</td><td>${w}</td>`; kb.appendChild(tr); });
 
 document.getElementById("stats").innerHTML = [
-  [`${fmt(tA, 1)} м²`, "площадь потолков"],
-  [`${fmt(tP, 1)} м`, "профиль по периметру"],
-  [tIn + tOut, "углов"],
-  [tL, "светильников в потолке"],
+  [`≈ ${fmt(tA, 0)} м²`, "площадь потолков, примерно"],
+  [tL, "отверстий под свет"],
 ].map(([b, s]) => `<div class="stat"><b>${b}</b><span>${s}</span></div>`).join("");
 
 // ---- plan ↔ table
