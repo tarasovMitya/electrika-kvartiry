@@ -194,7 +194,7 @@ table.lines tfoot td, table.bomt tfoot td { border-top: 2px solid var(--rule); b
     <div class="rules">
       <div><h3>Розетки — по плинтусу</h3><p>Кабели розеток идут по полу в плинтусе с кабель-каналом. От плинтуса к каждой розетке — короткая вертикальная штроба прямо под ней, горизонтальных штроб нет. Низкие розетки — на 20 см от пола, так штроба всего 10–15 см.</p></div>
       <div><h3>За шкафами коридора</h3><p>Из щита кабели к комнате идут вверх за нишей М3, над входной дверью за антресолью М2 и вниз за М6 и М1 к плинтусу. В шкафах нужен зазор или кабель-канал по задней стенке. Сквозь стены ничего не сверлится: в соседние комнаты кабели переходят по полу под порогами проёмов, к кровати — по плинтусу дальней стены и стены с окном.</p></div>
-      <div><h3>Свет — под потолком</h3><p>Кабели света идут над натяжным потолком в гофре. В соседнюю комнату — спуск по стене у проёма, под порогом и подъём с другой стороны, без отверстий в стенах. Выключатели беспроводные: в стенах к ним нет проводов, приёмники стоят под потолком у светильников и доступны через отверстие светильника. Бра — с вилкой, в розетки у кровати.</p></div>
+      <div><h3>Свет — под потолком</h3><p>Кабели света идут над натяжным потолком в гофре, в санузле — над реечным. В соседнюю комнату — спуск по стене у проёма, под порогом и подъём с другой стороны, без отверстий в стенах. Выключатели беспроводные: в стенах к ним нет проводов, приёмники стоят под потолком у светильников и доступны через отверстие светильника. Бра — с вилкой, в розетки у кровати.</p></div>
       <div><h3>Штробы: от плинтуса до розетки</h3><p><b id="chase-sum"></b> (□ на плане). Штроба 20×20 мм строго вертикально под розеткой, чтобы потом не попасть в кабель при сверлении. Кабель в штробе — без гофры, закрепить алебастром и заделать гипсовой штукатуркой. Исключение — санузел: там кабели идут только поверху, к розеткам — спуск с потолка в штробе под плиткой. Кухонный угол за холодильником — в кабель-канале.</p></div>
     </div>
     <div class="tbl"><table class="lines">
@@ -264,9 +264,9 @@ table.lines tfoot td, table.bomt tfoot td { border-top: 2px solid var(--rule); b
     <section class="card">
       <h2>Для натяжного потолка</h2>
       <ul>
-        <li>Все точки света, подвес и трек размечаются и выводятся до натяжки полотна, под каждый — закладная или платформа.</li>
+        <li>Все точки света, подвес и трек размечаются и выводятся до натяжки полотна, под каждый — закладная или платформа. В санузле потолок реечный, закладные там не нужны.</li>
         <li>Светильники — светодиодные, не ближе 20 см к стене.</li>
-        <li>Над ванной — светильник IP65 на 12 В через блок питания вне зоны ванны. Остальные в санузле — IP44.</li>
+        <li>В санузле — реечный потолок Mr.Tektum со светящимися модулями 12 В. Блок питания от 110 Вт покупается отдельно и ставится вне зоны ванны.</li>
         <li>В санузле нужна система уравнивания потенциалов (коробка СУП).</li>
         <li>Если в санузле будет вентилятор, его можно повесить на свет с таймером задержки или на вторую клавишу.</li>
       </ul>
@@ -279,7 +279,7 @@ table.lines tfoot td, table.bomt tfoot td { border-top: 2px solid var(--rule); b
 // Plan geometry and points come from data.js — the same data that builds the SketchUp model.
 // Coordinates are model centimetres; the drawing flips y so the plan reads like your sketch.
 
-const GROUP = { socket:"s", ip:"s", power:"s", lan:"s", switch:"w", spot:"l", spotip:"l", pendant:"l", sconce:"l", cable:"l", line:"l" };
+const GROUP = { socket:"s", ip:"s", power:"s", lan:"s", switch:"w", spot:"l", spotip:"l", pendant:"l", sconce:"l", cable:"l", line:"l", rack:"l" };
 // fixed drawing palette: the plan is always a white sheet
 const C = { s:"#6a3fd0", w:"#0a7d84", l:"#c97b00", lan:"#4a5560", wall:"#3a3f45", paper:"#ffffff", door:"#d8432f", win:"#2f6fd6", ink:"#1c2024", dim:"#6b7279" };
 const FILL = { wood:"#e9d6b9", white:"#f1f1ee", dark:"#5a5f66", steel:"#c9ced3", fabric:"#c4cfe2", glass:"#cfe6ef", warn:"#f3b2a4" };
@@ -371,7 +371,7 @@ P.forEach((p, i) => {
   const R = p.g === "l" ? 7.5 : 8.5;
   const col = p.k === "lan" ? C.lan : C[p.g];
   let x, y;
-  if (p.k === "line") { x = p.at[2] + 14; y = p.at[3]; }
+  if (p.k === "line" || p.k === "rack") { x = p.at[2] + 14; y = p.at[3]; }
   else if (p.at.length === 2) { [x, y] = p.at; }
   else {
     const [ax, ay, , nx, ny] = p.at;
@@ -384,8 +384,8 @@ P.forEach((p, i) => {
   placed.push([x, y]);
   const g = el("g", { class: "mk", "data-n": p.n, "data-g": p.g, tabindex: "0", role: "button", "aria-label": p.n + ". " + p.t });
   g.appendChild(el("circle", { class: "halo", cx: x, cy: Y(y), r: R + 7 }));
-  if (p.k === "line") {
-    g.appendChild(el("line", { x1: p.at[0], y1: Y(p.at[1]), x2: p.at[2], y2: Y(p.at[3]), stroke: col, "stroke-width": 4, "stroke-linecap": "round" }));
+  if (p.k === "line" || p.k === "rack") {
+    [p.at, ...(p.more || [])].forEach(a => g.appendChild(el("line", { x1: a[0], y1: Y(a[1]), x2: a[2], y2: Y(a[3]), stroke: col, "stroke-width": 4, "stroke-linecap": "round" })));
   } else if (p.at.length > 2) {
     // short leader from the wall to the marker
     g.appendChild(el("line", { x1: p.at[0], y1: Y(p.at[1]), x2: x, y2: Y(y), stroke: col, "stroke-width": 1 }));

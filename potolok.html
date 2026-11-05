@@ -97,7 +97,7 @@ td.n { font: 600 12px var(--mono); white-space: nowrap; }
       </svg>
     </div>
     <div class="legend">
-      <span>⊗ точечный GX53</span><span>◎ влагозащищённый IP44 / IP65</span><span>◉ подвес</span><span>━ трек</span><span>── кабель над полотном (до натяжки)</span><span>┆ ниша скрытого карниза</span><span>▤ реечный потолок, направление реек условно</span>
+      <span>⊗ точечный GX53</span><span>◉ подвес</span><span>━ трек</span><span>── кабель над полотном (до натяжки)</span><span>┆ ниша скрытого карниза</span><span>▤ реечный потолок, направление реек условно</span><span>┃ светящийся модуль в реечном потолке</span>
     </div>
   </section>
 
@@ -116,7 +116,7 @@ td.n { font: 600 12px var(--mono); white-space: nowrap; }
   <section class="block">
     <div class="block-head">
       <h2>Светильники в потолке</h2>
-      <p>Под каждый светильник монтажник ставит закладную до натяжки полотна, потом вклеивает термокольцо и прорезает отверстие. Покажите ему ваши светильники или их паспорта: диаметр выреза задаёт размер закладной и кольца. В санузле потолок реечный: закладные и кольца там не нужны, светильники ставятся в вырезы в рейках.</p>
+      <p>Под каждый светильник монтажник ставит закладную до натяжки полотна, потом вклеивает термокольцо и прорезает отверстие. Покажите ему ваши светильники или их паспорта: диаметр выреза задаёт размер закладной и кольца. В санузле потолок реечный: вместо светильников там светящиеся модули из комплекта, закладные и кольца не нужны.</p>
     </div>
     <div class="tbl"><table>
       <thead><tr><th>№</th><th>Светильник</th><th>Где</th><th>Что поставить до натяжки</th><th>Линия</th></tr></thead>
@@ -138,7 +138,7 @@ td.n { font: 600 12px var(--mono); white-space: nowrap; }
       <div><h3>Высота</h3><p>В проекте полотно — на ≈ 260 см от чистого пола, ≈ 5–7 см ниже перекрытия: столько нужно под платформы GX53 и гофру с кабелем. Скажите это замерщику — уровень он снимает сам.</p></div>
       <div><h3>Сначала электрика</h3><p>Все кабели над полотном прокладываются в гофре и крепятся к перекрытию клипсами до натяжки. Концы к светильникам — с запасом ≈ 30 см, чтобы достать через отверстие.</p></div>
       <div><h3>Доступ через отверстия</h3><p>Распаечные коробки и приёмники беспроводных выключателей ставятся у светильников — не дальше ≈ 20 см от отверстия, иначе до них не добраться после натяжки.</p></div>
-      <div><h3>Санузел</h3><p>Потолок реечный, а не натяжной: полотно здесь не считается, закладные и термокольца не нужны. Подвесная система и рейки монтируются после электрики, на том же уровне ≈ 260 см. Светильники ставятся в вырезы в рейках: 3 выреза, диаметр — по паспорту светильника. Светильник над ванной — IP65 на 12 В; трансформатор ставится вне зоны ванны, у выреза соседнего светильника. Кабели в санузле идут только поверху, по стенам; короб у правой стены — до монтажа потолка.</p></div>
+      <div><h3>Санузел</h3><p>Потолок реечный, а не натяжной: Mr.Tektum, рейка 30×35, белый матовый, комплект 1,8×1,8 м с четырьмя светящимися модулями по 0,9 м. Полотно здесь не считается, закладные и термокольца не нужны. Рейки подрезаются по месту и монтируются после электрики, вдоль стороны 1,70 м. Блок питания 12 В от 110 Вт покупается отдельно и ставится вне зоны ванны, с доступом через снимаемую рейку. Над перекрытием должны поместиться рейка 35 мм, направляющие, гофра и коробка: если 5–7 см не хватит, потолок опускается на подвесах, они докупаются. Кабели в санузле идут только поверху, по стенам; короб у правой стены — до монтажа потолка.</p></div>
       <div><h3>Кухня</h3><p>Под трек над столешницей — закладной брус по всей длине трека. Под подвес над столом — закладная под люстру с крюком или планкой, по центру стола.</p></div>
       <div><h3>Карнизы</h3><p>Комната — скрытый карниз в нише вдоль стены с окном и балконной дверью (≈ 3,2 м, ниша ≈ 15 см). Шторе хватит ≈ 2,2 м от угла со стеной коридора; кондиционер в углу у дальней стены висит под нишей — решите с замерщиком, вести нишу на всю стену или до кондиционера. Кухня — без карниза.</p></div>
       <div><h3>Шкафы</h3><p>Шкафы коридора ставятся после потолка.</p></div>
@@ -158,7 +158,7 @@ const C = { wall: "#3a3f45", paper: "#ffffff", ceil: "#f6f2e6", l: "#c97b00", in
 const CEIL_Z = 260;
 // the bathroom has a slatted ceiling: it is drawn on the plan, but the canvas figures and fittings leave it out
 const RACK = "b";
-const LIGHT = { spot: "Точечный GX53", spotip: "Влагозащищённый", pendant: "Подвес", line: "Трек" };
+const LIGHT = { spot: "Точечный GX53", spotip: "Влагозащищённый", pendant: "Подвес", line: "Трек", rack: "Светящийся модуль" };
 // a spot marked IPxx in its name is a wet-zone fixture, whatever its plan symbol
 const P = DATA.points.map((p, i) => Object.assign({ n: i + 1 }, p, p.k === "spot" && /IP\d/.test(p.t) ? { k: "spotip" } : {}));
 const lights = P.filter(p => LIGHT[p.k]);
@@ -225,7 +225,12 @@ const R = 7;
 lights.forEach(p => {
   const g = el("g", { class: "mk", "data-n": p.n, tabindex: 0, role: "button", "aria-label": `${p.n}. ${p.t}` });
   const [x, y] = p.at, cy = Y(y);
-  if (p.k === "line") {
+  if (p.k === "rack") {
+    [p.at, ...(p.more || [])].forEach(a => g.appendChild(el("line", { x1: a[0], y1: Y(a[1]), x2: a[2], y2: Y(a[3]), stroke: C.l, "stroke-width": 4, "stroke-linecap": "round" })));
+    const my = Y((p.at[1] + p.at[3]) / 2);
+    g.appendChild(el("circle", { cx: p.at[0], cy: my, r: R, fill: "#fff", stroke: C.l, "stroke-width": 2 }));
+    g.appendChild(el("text", { x: p.at[0], y: my, fill: C.l }, p.n));
+  } else if (p.k === "line") {
     g.appendChild(el("line", { x1: p.at[0], y1: Y(p.at[1]), x2: p.at[2], y2: Y(p.at[3]), stroke: C.l, "stroke-width": 5, "stroke-linecap": "round" }));
     g.appendChild(el("circle", { cx: (p.at[0] + p.at[2]) / 2, cy: Y(p.at[1]) - 12, r: R, fill: "#fff", stroke: C.l, "stroke-width": 2 }));
     g.appendChild(el("text", { x: (p.at[0] + p.at[2]) / 2, y: Y(p.at[1]) - 12, fill: C.l }, p.n));
@@ -246,19 +251,19 @@ rooms.forEach(r => {
   const DISCUSS = { g: "скрытый карниз у окна", k: "без карниза", [RACK]: "реечный потолок<small>полотно здесь не считается</small>" };
   const canvas = [need > 3.2 ? `полотно без шва<small>комната шире 3,2 м — спросите про широкое полотно</small>` : "", DISCUSS[r.id] || ""].filter(Boolean).join("<br>") || "—";
   const byKind = {};
-  r.lights.forEach(p => byKind[LIGHT[p.k]] = (byKind[LIGHT[p.k]] || 0) + 1);
+  r.lights.forEach(p => byKind[LIGHT[p.k]] = (byKind[LIGHT[p.k]] || 0) + 1 + (p.more || []).length);
   const kinds = Object.entries(byKind).map(([k, v]) => `${k.toLowerCase()} — ${v}`).join(", ");
   if (r.id !== RACK) { tA += area; tP += per; tIn += inner; tOut += outer; tL += r.lights.length; }
   const tr = document.createElement("tr");
   tr.innerHTML = `<td><b>${r.name}</b></td><td class="r mono">${fmt(w, 2)} × ${fmt(h, 2)}</td><td class="r mono">≈ ${fmt(area, 1)} м²</td><td class="r mono">≈ ${fmt(per, 1)} м</td>
-    <td class="r mono">${inner}${outer ? `<small>+ ${outer} внешн.</small>` : ""}</td><td>${canvas}</td><td class="r mono">${r.lights.length}<small>${kinds}</small></td>`;
+    <td class="r mono">${inner}${outer ? `<small>+ ${outer} внешн.</small>` : ""}</td><td>${canvas}</td><td class="r mono">${Object.values(byKind).reduce((a, b) => a + b, 0)}<small>${kinds}</small></td>`;
   rb.appendChild(tr);
 });
 document.getElementById("rooms-foot").innerHTML = `<tr><td>Всего под полотно</td><td></td><td class="r mono">≈ ${fmt(tA, 1)} м²</td><td class="r mono">≈ ${fmt(tP, 1)} м</td><td class="r mono">${tIn}${tOut ? `<small>+ ${tOut} внешн.</small>` : ""}</td><td></td><td class="r mono">${tL}</td></tr>`;
 
 // ---- lights table
 const PREP = {
-  rack: "Вырез в рейке под светильник; закладная и термокольцо не нужны",
+  rack: "Модуль из комплекта, в линии реек; закладная и термокольцо не нужны",
   spot: "Платформа под GX53 + термокольцо",
   spotip: "Платформа + термокольцо; светильник влагозащищённый",
   pendant: "Закладная под люстру (крюк или планка) + термокольцо под чашу",
@@ -269,7 +274,6 @@ rooms.forEach(r => r.lights.forEach(p => {
   const L = lineOf(p);
   let prep = r.id === RACK ? PREP.rack : PREP[p.k];
   if (p.k === "line") prep += `<small>брус ≈ ${fmt(Math.hypot(p.at[2] - p.at[0], p.at[3] - p.at[1]) / 100, 1)} м</small>`;
-  if (/12 В/.test(p.t)) prep += "<small>трансформатор 12 В — вне зоны ванны, у выреза соседнего светильника</small>";
   const tr = document.createElement("tr");
   tr.className = "pt"; tr.dataset.n = p.n;
   tr.innerHTML = `<td class="n">${p.n}</td><td><b>${p.t}</b><small>${r.name}</small></td><td>${p.w}${p.note ? `<small>${p.note}</small>` : ""}</td><td>${prep}</td>
